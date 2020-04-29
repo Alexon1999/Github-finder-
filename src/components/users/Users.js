@@ -1,9 +1,10 @@
-import React, { Component, useContext } from 'react';
+import React, { useContext } from 'react';
 import UserItem from './UserItem';
 import UsersContext from '../context/UsersContext';
 import Spinner from '../layouts/Spinner';
 // impt : proptype shortcut
-import PropTypes from 'prop-types';
+
+import GithubContext from '../../context/github/GithubContext';
 
 // class Users extends Component {
 //   // state = {
@@ -42,7 +43,9 @@ import PropTypes from 'prop-types';
 // * This classs have not state so : we
 //* Convert  to function :
 
-const Users = ({ users, loading }) => {
+const Users = () => {
+  const githubContext = useContext(GithubContext);
+  const { users, loading } = githubContext;
   if (loading) {
     return <Spinner />;
   } else {
@@ -68,12 +71,6 @@ const Users = ({ users, loading }) => {
 //     </div>
 //   );
 // }
-
-// proptypes for the component Users
-Users.propTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
 
 const userStyle = {
   display: 'grid',
